@@ -1,8 +1,3 @@
-#FROM ubuntu:latest
-LABEL authors="Java"
-
-ENTRYPOINT ["top", "-b"]
-
 # Imagen base con Java 21
 FROM eclipse-temurin:21-jdk-alpine
 
