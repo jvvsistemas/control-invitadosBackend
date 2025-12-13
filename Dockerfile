@@ -1,14 +1,21 @@
-# Imagen base con Java 21
-FROM eclipse-temurin:21-jdk-alpine
+# ====== ETAPA 1: BUILD ======
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 
-# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar el jar generado
-COPY target/invitacion-backend-0.0.1-SNAPSHOT.jar app.jar
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Puerto que usa Spring Boot
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# ====== ETAPA 2: RUN ======
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/invitacion-backend-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 
-# Comando para ejecutar la app
 ENTRYPOINT ["java","-jar","app.jar"]
