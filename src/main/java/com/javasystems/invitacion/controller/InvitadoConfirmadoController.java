@@ -98,6 +98,13 @@ public class InvitadoConfirmadoController{
         return ResponseEntity.ok(invitadocpnfirmado);
     }
 
-
+    
+   @RequestMapping("/health")
+   public class HealthController {
+       @GetMapping
+       public ResponseEntity<String> health() {
+        return ResponseEntity.ok("OK");
+       }
+   }
 }
 
