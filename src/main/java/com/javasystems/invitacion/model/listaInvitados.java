@@ -19,6 +19,17 @@ public class listaInvitados {
 
     public boolean confirmado;
 
+     public Integer mesa;
+
+    public Integer getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Integer mesa) {
+        this.mesa = mesa;
+    } 
+    
+
     public boolean isConfirmado() {
         return confirmado;
     }
